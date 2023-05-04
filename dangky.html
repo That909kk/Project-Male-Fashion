@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dang ky</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<script>
+    function signup(e) {
+        event.preventDefault();
+        var hovaten = document.getElementById("fullname").value;
+        var username = document.getElementById("username").value;
+        var matkhau = document.getElementById("password").value;
+        var email = document.getElementById("email").value;
+        var user = {
+            fullname: hovaten,
+            username: username,
+            password: matkhau,
+            email: email,
+        }
+        var json = JSON.stringify(user);
+        localStorage.setItem(username, json);
+        alert("Đăng ký thành công");
+        window.location.href = "index.html"
+    }
+
+    function Checkhoten() {
+        var hovaten = document.getElementById("fullname").value;
+        var regex = /^[A-Z].*(\s*[A-Z].*)*$/;
+        if (regex.test(hovaten)) {
+            document.getElementById("erhoten").innerHTML = "";
+            return true;
+        } else {
+            document.getElementById("erhoten").innerHTML = "Họ tên không hợp lệ!Ví dụ : Nguyễn Văn A";
+            return false;
+        }
+    }
+
+    function Checktendn() {
+        var tendn = document.getElementById("username").value;
+        var regex = /^[A-Za-z0-9]+$/;
+        if (regex.test(tendn)) {
+            document.getElementById("ertendn").innerHTML = "";
+            return true;
+        } else {
+            document.getElementById("ertendn").innerHTML = "Tên đăng nhập không hợp lệ!Ví dụ : abc123";
+            return false;
+        }
+    }
+
+    function Checkmatkhau() {
+        var matkhau = document.getElementById("password").value;
+        var regex = /^.{6,}$/;
+        if (regex.test(matkhau)) {
+            document.getElementById("ermatkhau").innerHTML = "";
+            return true;
+        } else {
+            document.getElementById("ermatkhau").innerHTML = "Mật khẩu không hợp lệ!Ít nhất 6 ký tự";
+            return false;
+        }
+    }
+
+    function Checkemail() {
+        var email = document.getElementById("email").value;
+        var regex = /^[A-Za-z0-9]+@[A-Za-z0-9]+(\.[A-Za-z0-9]+)$/;
+        if (regex.test(email)) {
+            document.getElementById("eremail").innerHTML = "";
+            return true;
+        } else {
+            document.getElementById("eremail").innerHTML = "Email không hợp lệ!Ví dụ :mthat456@gmail.com";
+            return false;
+
+        }
+    }
+
+    function Checkall() {
+        if (Checkhoten() && Checktendn() && Checkmatkhau() && Checkemail()) {
+            signup();
+            return true;
+        } else {
+            alert("Đăng ký không thành công");
+            window.location.href = "dangky.html"
+            return false;
+        }
+    }
+</script>
+
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <div class="row justify-content-around">
+                <form action="" class="col-md-6 bg-light p-3 my-3" onsubmit="Checkall()">
+                    <h1 class="text-center text-uppercase h3 py-3">đăng ký tài khoản</h1>
+                    <div class="form-group">
+                        <label for="fullname">Họ và tên</label>
+                        <input type="text" name="fullname" id="fullname" class="form-control" onblur="Checkhoten();">
+                        <span class="text-danger" id="erhoten"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Tên đăng nhập</label>
+                        <input type="text" name="username" id="username" class="form-control" onblur="Checktendn();">
+                        <span class="text-danger" id="ertendn"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" name="password" id="password" class="form-control" onblur='Checkmatkhau();'>
+                        <span class="text-danger" id="ermatkhau"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" onblur="Checkemail();">
+                        <span class="text-danger" id="eremail"></span>
+                    </div>
+                    <input type="submit" value="Đăng ký" class="btn-primary btn btn-block">
+                    <a href="../dangnhap.html">Đăng nhập</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

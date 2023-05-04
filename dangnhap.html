@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<script>
+    function login(e) {
+        event.preventDefault();
+        var username = document.getElementById("username").value;
+        var matkhau = document.getElementById("password").value;
+        var user = localStorage.getItem(username);
+        var data = JSON.parse(user);
+        if (user == null) {
+            alert("Vui lòng nhập đầy đủ thông tin")
+        } else if (username == data.username && matkhau == data.password) {
+            alert("Đăng nhập thành công")
+            window.location.href = "index2.html"
+        } else {
+            alert("Đăng nhập thất bại")
+        }
+    }
+</script>
+<style>
+    .them {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+</style>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <div class="row justify-content-around">
+                <form action="" class="col-md-6 bg-light p-3 my-3" onsubmit="login()">
+                    <h1 class="text-center text-uppercase h3 py-3">Đăng nhập</h1>
+                    <div class="form-group">
+                        <label for="username">Tên đăng nhập</label>
+                        <input type="text" name="username" id="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <input type="submit" value="Đăng nhập" class="btn-primary btn btn-block">
+                    <div class="them">
+                        <a href="./index.html">Quay về trang chủ</a>
+                        <a href="./quenmatkhau.html">Quên Mật Khẩu</a>
+                        <a href="./dangky.html">Đăng ký tài khoản</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
